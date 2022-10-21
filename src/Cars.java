@@ -9,13 +9,24 @@ public class Cars {
     private String productionCountry;
 
     public Cars(String brand, String model, float volumeEngine, String colorBody, int yearProduction, String productionCountry) {
-        this.brand = brand;
-        this.model = model;
-        this.volumeEngine = volumeEngine;
-        this.colorBody = colorBody;
-        this.yearProduction = yearProduction;
-        this.productionCountry = productionCountry;
+        this.brand = validOrDefault(brand, "Default");
+        this.model = validOrDefault(model, "Default");
+        this.volumeEngine = volumeEngine >= 0 ? volumeEngine : 0;
+        this.colorBody = validOrDefault(colorBody, "Белый");
+        this.yearProduction = yearProduction >= 0 ? yearProduction : 0;
+        this.productionCountry = validOrDefault(productionCountry, "Default");
     }
+
+    private String validOrDefault(String value, String valueDefault) {
+        if (value == null || value.isBlank()) {
+            return valueDefault;
+        } else {
+            return value;
+        }
+
+
+    }
+
 
     public String getBrand() {
         return brand;
@@ -66,7 +77,7 @@ public class Cars {
     }
 
 
-    public static String toString(Cars cars) {
+    public String toString(Cars cars) {
         return "Cars{" +
                 "brand='" + cars.getBrand() + '\'' +
                 ", model='" + cars.getModel() + '\'' +
@@ -76,14 +87,15 @@ public class Cars {
                 ", productionCountry='" + cars.getProductionCountry() + '\'' +
                 '}';
     }
+
     public static String infoCar(Cars cars) {
         return
                 "brand=" + cars.getBrand() +
-                ", model=" + cars.getModel() +
-                ", volumeEngine=" + cars.getVolumeEngine() +
-                ", colorBody=" + cars.getColorBody() +
-                ", yearProduction=" + cars.getYearProduction() +
-                ", productionCountry=" + cars.getProductionCountry() ;
+                        ", model=" + cars.getModel() +
+                        ", volumeEngine=" + cars.getVolumeEngine() +
+                        ", colorBody=" + cars.getColorBody() +
+                        ", yearProduction=" + cars.getYearProduction() +
+                        ", productionCountry=" + cars.getProductionCountry();
 
 
     }
