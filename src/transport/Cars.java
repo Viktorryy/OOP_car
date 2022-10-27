@@ -2,13 +2,9 @@ package transport;
 
 import java.time.LocalDate;
 
-public class Cars {
-    private final String brand;
-    private final String model;
+public class Cars extends Transport {
+
     private float volumeEngine;
-    private String colorBody;
-    private final int yearProduction;
-    private final String productionCountry;
     private String transmission;
     private final String bodyType;
     private String registrationNumber;
@@ -17,43 +13,60 @@ public class Cars {
     private Key key;
     private Insurance insurance;
 
-    public Cars(String brand, String model, float volumeEngine,
-                String colorBody, int yearProduction,
-                String productionCountry, String transmission,
-                String bodyType, String registrationNumber,
-                int numberOfSeats, String rubberSign, Key key, Insurance insurance) {
-        this.brand = validOrDefault(brand, "Default");
-        this.model = validOrDefault(model, "Default");
-        this.volumeEngine = volumeEngine > 0 ? volumeEngine : 0;
-        this.colorBody = validOrDefault(colorBody, "Белый");
-        this.yearProduction = yearProduction > 0 ? yearProduction : 2000;
-        this.productionCountry = validOrDefault(productionCountry, "Default");
+//    public Cars(String audi, String brand, float v1, String model, float volumeEngine,
+//                String германия, String s1, String s, String colorBody, int yearProduction,
+//                String summer, boolean b, Object o, double v, String productionCountry) {
+//        this(brand,  model,volumeEngine,
+//                colorBody, yearProduction,
+//                productionCountry,
+//                "Default",
+//                "Default",
+//                "х000хх000",
+//                5,
+//                "summer",
+//                new Key(),
+//                new Insurance()
+//        );
 
-        this.transmission = validOrDefault(transmission, "automatic");
-        this.bodyType = validOrDefault(bodyType, "Default");
-        this.registrationNumber = validOrDefault(registrationNumber, "х000хх000");
-        this.numberOfSeats = numberOfSeats > 0 ? numberOfSeats : 0;
-        this.rubberSign = validOrDefault(rubberSign, "summer");
+//        public Cars(String brand, String model, float volumeEngine,
+//                String colorBody, int yearProduction,
+//                String productionCountry, String transmission,
+//                String bodyType, String registrationNumber,
+//                int numberOfSeats, String rubberSign, Key key, Insurance insurance) {
+//        super.brand = brand;
+//        super.model = validOrDefault(model, "Default");
+//        this.volumeEngine = volumeEngine > 0 ? volumeEngine : 0;
+//            super.colorBody = validOrDefault(colorBody, "Белый");
+//            super.yearProduction = yearProduction > 0 ? yearProduction : 2000;
+//            super.productionCountry = validOrDefault(productionCountry, "Default");
+//
+//        this.transmission = validOrDefault(transmission, "automatic");
+//        this.bodyType = validOrDefault(bodyType, "Default");
+//        this.registrationNumber = validOrDefault(registrationNumber, "х000хх000");
+//        this.numberOfSeats = numberOfSeats > 0 ? numberOfSeats : 0;
+//        this.rubberSign = validOrDefault(rubberSign, "summer");
+//if (key == null) {
+//        this.key = new Key();
+//    } else {
+//        this.key = key;
+//    }
+//        if (insurance == null) {
+//        this.insurance = new Insurance();
+//    } else {
+//        this.insurance = insurance;
+//    }
+//
+//}
 
-        if (key == null) {
-            this.key = new Key();
-        } else {
-            this.key = key;
-        }
-        if (insurance == null) {
-            this.insurance = new Insurance();
-        } else {
-            this.insurance = insurance;
-        }
-
-    }
-    public Cars(String audi, String brand, float v1, String model, float volumeEngine,
-                String германия, String s1, String s, String colorBody, int yearProduction,
-                String summer, boolean b, Object o, double v, String productionCountry) {
-        this(brand,  model,volumeEngine,
-                colorBody, yearProduction,
-                productionCountry,
-                "Default",
+    public Cars(String brand, String model, String colorBody,
+                int yearProduction, String productionCountry,
+                int speedMax, float volumeEngine,
+                String transmission, String bodyType,
+                String registrationNumber, int numberOfSeats,
+                String rubberSign ) {
+        super(brand, model, colorBody, yearProduction,
+                productionCountry, speedMax);
+        this(0f, "Default",
                 "Default",
                 "х000хх000",
                 5,
@@ -61,10 +74,26 @@ public class Cars {
                 new Key(),
                 new Insurance()
         );
-
     }
 
 
+    public Cars(String brand, String model, String colorBody,
+                int yearProduction, String productionCountry,
+                int speedMax, float volumeEngine,
+                String transmission, String bodyType,
+                String registrationNumber, int numberOfSeats,
+                String rubberSign, Key key, Insurance insurance) {
+        super(brand, model, colorBody, yearProduction,
+                productionCountry, speedMax);
+        this.volumeEngine = volumeEngine;
+        this.transmission = transmission;
+        this.bodyType = bodyType;
+        this.registrationNumber = registrationNumber;
+        this.numberOfSeats = numberOfSeats;
+        this.rubberSign = rubberSign;
+        this.key = key;
+        this.insurance = insurance;
+    }
 
 
     private static String validOrDefault(String value, String valueDefault) {
@@ -140,13 +169,13 @@ public class Cars {
         this.rubberSign = rubberSign;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
+//    public String getBrand() {
+//        return brand;
+//    }
+//
+//    public String getModel() {
+//        return model;
+//    }
 
     public float getVolumeEngine() {
         return volumeEngine;
@@ -156,38 +185,24 @@ public class Cars {
         this.volumeEngine = volumeEngine;
     }
 
-    public String getColorBody() {
-        return colorBody;
-    }
+//    public String getColorBody() {
+//        return colorBody;
+//    }
+//
+//    public void setColorBody(String colorBody) {
+//        this.colorBody = colorBody;
+//    }
+//
+//    public int getYearProduction() {
+//        return yearProduction;
+//    }
+//
+//    public String getProductionCountry() {
+//        return productionCountry;
+//    }
 
-    public void setColorBody(String colorBody) {
-        this.colorBody = colorBody;
-    }
 
-    public int getYearProduction() {
-        return yearProduction;
-    }
 
-    public String getProductionCountry() {
-        return productionCountry;
-    }
-
-    @Override
-    public String toString() {
-        return "transport.Cars{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", volumeEngine=" + volumeEngine +
-                ", colorBody='" + colorBody + '\'' +
-                ", yearProduction=" + yearProduction +
-                ", productionCountry='" + productionCountry + '\'' +
-                ", transmission='" + transmission + '\'' +
-                ", bodyType='" + bodyType + '\'' +
-                ", registrationNumber='" + registrationNumber + '\'' +
-                ", numberOfSeats=" + numberOfSeats +
-                ", rubberSign='" + rubberSign + '\'' +
-                '}';
-    }
 
     public static String infoCar(Cars cars) {
         return
