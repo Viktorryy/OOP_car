@@ -6,9 +6,9 @@ public class Cars extends Transport {
 
     private float volumeEngine;
     private String transmission;
-    private final String bodyType;
+    private String bodyType;
     private String registrationNumber;
-    private final int numberOfSeats;
+    private int numberOfSeats;
     private String rubberSign;
     private Key key;
     private Insurance insurance;
@@ -58,23 +58,21 @@ public class Cars extends Transport {
 //
 //}
 
-    public Cars(String brand, String model, String colorBody,
-                int yearProduction, String productionCountry,
-                int speedMax, float volumeEngine,
-                String transmission, String bodyType,
-                String registrationNumber, int numberOfSeats,
-                String rubberSign ) {
-        super(brand, model, colorBody, yearProduction,
-                productionCountry, speedMax);
-        this(0f, "Default",
-                "Default",
-                "х000хх000",
-                5,
-                "summer",
-                new Key(),
-                new Insurance()
-        );
-    }
+//    public Cars(String brand, String model, String colorBody,
+//                int yearProduction, String productionCountry,
+//                int speedMax, float volumeEngine,
+//                String transmission, String bodyType,
+//                String registrationNumber, int numberOfSeats,
+//                String rubberSign ) {
+//        super(brand, model, colorBody, yearProduction,
+//                productionCountry, speedMax);
+//        this( 0f, "Default",
+//                "Default",
+//                "х000хх000",
+//                5,
+//                "summer"
+//        );
+//    }
 
 
     public Cars(String brand, String model, String colorBody,
@@ -85,24 +83,35 @@ public class Cars extends Transport {
                 String rubberSign, Key key, Insurance insurance) {
         super(brand, model, colorBody, yearProduction,
                 productionCountry, speedMax);
-        this.volumeEngine = volumeEngine;
-        this.transmission = transmission;
-        this.bodyType = bodyType;
-        this.registrationNumber = registrationNumber;
-        this.numberOfSeats = numberOfSeats;
-        this.rubberSign = rubberSign;
-        this.key = key;
-        this.insurance = insurance;
-    }
+        this.volumeEngine = volumeEngine > 0 ? volumeEngine : 0;
+        this.transmission = validOrDefault(transmission, "automatic");
+        this.bodyType = validOrDefault(bodyType, "Default");
+        this.registrationNumber = validOrDefault(registrationNumber, "х000хх000");
+        this.numberOfSeats = numberOfSeats > 0 ? numberOfSeats : 0;
+        this.rubberSign = validOrDefault(rubberSign, "summer");
 
-
-    private static String validOrDefault(String value, String valueDefault) {
-        if (value == null || value.isEmpty()) {
-            return valueDefault;
+        if (key == null) {
+            this.key = new Key();
         } else {
-            return value;
+            this.key = key;
         }
+
+        if (insurance == null) {
+            this.insurance = new Insurance();
+        } else {
+            this.insurance = insurance;
+        }
+
     }
+
+
+//    public static String validOrDefault(String value, String valueDefault) {
+//        if (value == null || value.isEmpty()) {
+//            return valueDefault;
+//        } else {
+//            return value;
+//        }
+//    }
 
     public static String changeWheels(String rubber) {
         if (rubber == "summer") {
@@ -202,8 +211,6 @@ public class Cars extends Transport {
 //    }
 
 
-
-
     public static String infoCar(Cars cars) {
         return
                 "brand=" + cars.getBrand() +
@@ -217,10 +224,10 @@ public class Cars extends Transport {
                         ", registrationNumber='" + cars.registrationNumber + '\'' +
                         ", numberOfSeats=" + cars.numberOfSeats +
                         ", rubberSign='" + cars.rubberSign +
-                        ", Key = " + (cars.getKey().isWithoutKeyAccess()?" безключевой доступ,":" доступ ключем," )+
-                         (cars.getKey().isRemoteRunEngine()?" удаленный запуск,":" обычный запуск," )+
-                        " Insurance: № " + cars.getInsurance().getNumber()+
-                        ", стоимость: " + cars.getInsurance().getCost()+
+                        ", Key = " + (cars.getKey().isWithoutKeyAccess() ? " безключевой доступ," : " доступ ключем,") +
+                        (cars.getKey().isRemoteRunEngine() ? " удаленный запуск," : " обычный запуск,") +
+                        " Insurance: № " + cars.getInsurance().getNumber() +
+                        ", стоимость: " + cars.getInsurance().getCost() +
                         ", дата действия " + cars.getInsurance().getExpierDate();
 
 
@@ -272,18 +279,18 @@ public class Cars extends Transport {
 
     public static class Insurance {
         private final LocalDate expierDate;
-        private final double cost;
+        private final int cost;
         private final String number;
 
-        public Insurance(LocalDate expierDate, double cost, String number) {
+        public Insurance(LocalDate expierDate, int cost, String number) {
             if (expierDate == null) {
                 this.expierDate = LocalDate.now().plusDays(365);
             } else {
                 this.expierDate = expierDate;
             }
 
-            this.cost = cost <= 0 ? cost : 0;
-            this.number = Cars.validOrDefault(number, "123456789");
+            this.cost = cost > 0 ? cost : 0;
+            this.number = Transport.validOrDefault(number, "123456789");
         }
 
         public Insurance() {

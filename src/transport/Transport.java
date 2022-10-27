@@ -17,7 +17,7 @@ public class Transport {
         this.colorBody = validOrDefault(colorBody, "Default");
         this.yearProduction = yearProduction;
         this.productionCountry = productionCountry;
-        this.speedMax = speedMax < 0 ? speedMax : 0;
+        this.speedMax = speedMax > 0 ? speedMax : 0;
     }
 
     public Transport(String brand, String model,
@@ -27,7 +27,7 @@ public class Transport {
                 0, "Default", 0);
     }
 
-    private String validOrDefault(String value, String valueDefault) {
+    public static String validOrDefault(String value, String valueDefault) {
         if (value == null || value.isBlank()) {
             return valueDefault;
         } else {
@@ -38,7 +38,7 @@ public class Transport {
     }
 
 
-    public String getBrand() {
+    public  String getBrand() {
         return brand;
     }
 
@@ -68,5 +68,17 @@ public class Transport {
 
     public void setSpeedMax(int speedMax) {
         this.speedMax = speedMax;
+    }
+
+    @Override
+    public String toString() {
+        return "transport.Transport{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", colorBody='" + colorBody + '\'' +
+                ", yearProduction=" + yearProduction +
+                ", productionCountry='" + productionCountry + '\'' +
+                ", speedMax=" + speedMax +
+                '}';
     }
 }
