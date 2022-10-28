@@ -1,6 +1,6 @@
 package transport;
 
-public class Transport {
+public abstract class Transport {
     private  String brand;
     private  String model;
     private String colorBody;
@@ -81,4 +81,8 @@ public class Transport {
                 ", speedMax=" + speedMax +
                 '}';
     }
+
+    public abstract void Refill();
+
+
 }

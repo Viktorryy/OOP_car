@@ -255,6 +255,12 @@ public class Cars extends Transport {
     }
 
 
+    public void Refill() {
+        System.out.println("Можно заправлять бензином, дизелем на заправке.");
+        System.out.println("Можно заряжать на специальных электропарковках, если это электрокар.");
+    }
+
+
     public static class Key {
         private final boolean remoteRunEngine;
         private final boolean withoutKeyAccess;

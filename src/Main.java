@@ -1,6 +1,7 @@
 import transport.Bus;
 import transport.Cars;
 import transport.Train;
+import transport.Transport;
 
 public class Main {
     public static void main(String[] args) {
@@ -36,6 +37,8 @@ public class Main {
         car[2].setRegistrationNumber("f123gs42256");
         System.out.println(Cars.infoCar(car[2]));
 
+        car[2].Refill();
+
         Train[] train = new Train[2];
         train[0]= new Train("Поезд «Ласточка»", "модель B-901", "",
                 2011, "Россия", 301, 3500,
@@ -47,10 +50,12 @@ public class Main {
                 10,"Ленинградский вокзал", "Ленинград-Пассажирский",
                 8);
 
+
         System.out.println("     Поезда");
         for (Train j: train) {
             System.out.println(j);
         }
+        train[0].Refill();
 
         Bus[] bus = new Bus[3];
         bus[0] = new Bus("Икарус", "000", "Красный", 2000, "Россия", 90);
@@ -62,5 +67,6 @@ public class Main {
         for (Bus j: bus) {
             System.out.println(j);
         }
+        bus[0].Refill();
     }
 }

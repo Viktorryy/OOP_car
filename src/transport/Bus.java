@@ -11,4 +11,9 @@ public class Bus extends Transport{
     public String toString() {
         return "transport.Bus{} " + super.toString();
     }
+
+    @Override
+    public void Refill() {
+        System.out.println("Нужно заправлять бензином или дизелем на заправке.");
+    }
 }
