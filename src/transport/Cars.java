@@ -1,6 +1,7 @@
 package transport;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Cars extends Transport {
 
@@ -105,23 +106,6 @@ public class Cars extends Transport {
     }
 
 
-//    public static String validOrDefault(String value, String valueDefault) {
-//        if (value == null || value.isEmpty()) {
-//            return valueDefault;
-//        } else {
-//            return value;
-//        }
-//    }
-
-    public static String changeWheels(String rubber) {
-        if (rubber == "summer") {
-            rubber = "winter";
-        } else {
-            rubber = "summer";
-
-        }
-        return rubber;
-    }
 
     public Key getKey() {
         return key;
@@ -178,13 +162,6 @@ public class Cars extends Transport {
         this.rubberSign = rubberSign;
     }
 
-//    public String getBrand() {
-//        return brand;
-//    }
-//
-//    public String getModel() {
-//        return model;
-//    }
 
     public float getVolumeEngine() {
         return volumeEngine;
@@ -194,44 +171,17 @@ public class Cars extends Transport {
         this.volumeEngine = volumeEngine;
     }
 
-//    public String getColorBody() {
-//        return colorBody;
-//    }
-//
-//    public void setColorBody(String colorBody) {
-//        this.colorBody = colorBody;
-//    }
-//
-//    public int getYearProduction() {
-//        return yearProduction;
-//    }
-//
-//    public String getProductionCountry() {
-//        return productionCountry;
-//    }
 
+    public static String changeWheels(String rubber) {
+        if (rubber == "summer") {
+            rubber = "winter";
+        } else {
+            rubber = "summer";
 
-    public static String infoCar(Cars cars) {
-        return
-                "brand=" + cars.getBrand() +
-                        ", model=" + cars.getModel() +
-                        ", volumeEngine=" + cars.getVolumeEngine() +
-                        ", colorBody=" + cars.getColorBody() +
-                        ", yearProduction=" + cars.getYearProduction() +
-                        ", productionCountry=" + cars.getProductionCountry() +
-                        ", transmission='" + cars.transmission + '\'' +
-                        ", bodyType='" + cars.bodyType + '\'' +
-                        ", registrationNumber='" + cars.registrationNumber + '\'' +
-                        ", numberOfSeats=" + cars.numberOfSeats +
-                        ", rubberSign='" + cars.rubberSign +
-                        ", Key = " + (cars.getKey().isWithoutKeyAccess() ? " безключевой доступ," : " доступ ключем,") +
-                        (cars.getKey().isRemoteRunEngine() ? " удаленный запуск," : " обычный запуск,") +
-                        " Insurance: № " + cars.getInsurance().getNumber() +
-                        ", стоимость: " + cars.getInsurance().getCost() +
-                        ", дата действия " + cars.getInsurance().getExpierDate();
-
-
+        }
+        return rubber;
     }
+
 
     public boolean isCorrectRegNumber(String registrationNumber) {
         // х000хх000
@@ -260,6 +210,26 @@ public class Cars extends Transport {
         System.out.println("Можно заряжать на специальных электропарковках, если это электрокар.");
     }
 
+    public static String infoCar(Cars cars) {
+        return
+                "brand=" + cars.getBrand() +
+                        ", model=" + cars.getModel() +
+                        ", volumeEngine=" + cars.getVolumeEngine() +
+                        ", colorBody=" + cars.getColorBody() +
+                        ", yearProduction=" + cars.getYearProduction() +
+                        ", productionCountry=" + cars.getProductionCountry() +
+                        ", transmission='" + cars.transmission + '\'' +
+                        ", bodyType='" + cars.bodyType + '\'' +
+                        ", registrationNumber='" + cars.registrationNumber + '\'' +
+                        ", numberOfSeats=" + cars.numberOfSeats +
+                        ", rubberSign='" + cars.rubberSign +
+                        ", Key = " + (cars.getKey().isWithoutKeyAccess() ? " безключевой доступ," : " доступ ключем,") +
+                        (cars.getKey().isRemoteRunEngine() ? " удаленный запуск," : " обычный запуск,") +
+                        " Insurance: № " + cars.getInsurance().getNumber() +
+                        ", стоимость: " + cars.getInsurance().getCost() +
+                        ", дата действия " + cars.getInsurance().getExpierDate();
+
+    }
 
     public static class Key {
         private final boolean remoteRunEngine;
@@ -281,7 +251,31 @@ public class Cars extends Transport {
         public boolean isWithoutKeyAccess() {
             return withoutKeyAccess;
         }
+
+        @Override
+        public String toString() {
+            return "transport.Cars.Key{" +
+                    "remoteRunEngine=" + remoteRunEngine +
+                    ", withoutKeyAccess=" + withoutKeyAccess +
+                    '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Key)) return false;
+            Key key = (Key) o;
+            return isRemoteRunEngine() == key.isRemoteRunEngine() && isWithoutKeyAccess() == key.isWithoutKeyAccess();
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(isRemoteRunEngine(), isWithoutKeyAccess());
+        }
     }
+
+
+
 
     public static class Insurance {
         private final LocalDate expierDate;
@@ -327,5 +321,26 @@ public class Cars extends Transport {
             }
         }
 
+        @Override
+        public String toString() {
+            return "transport.Cars.Insurance{" +
+                    "expierDate=" + expierDate +
+                    ", cost=" + cost +
+                    ", number='" + number + '\'' +
+                    '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Insurance)) return false;
+            Insurance insurance = (Insurance) o;
+            return getCost() == insurance.getCost() && Objects.equals(getExpierDate(), insurance.getExpierDate()) && Objects.equals(getNumber(), insurance.getNumber());
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(getExpierDate(), getCost(), getNumber());
+        }
     }
 }

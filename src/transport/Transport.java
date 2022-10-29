@@ -1,5 +1,7 @@
 package transport;
 
+import java.util.Objects;
+
 public abstract class Transport {
     private  String brand;
     private  String model;
@@ -33,8 +35,6 @@ public abstract class Transport {
         } else {
             return value;
         }
-
-
     }
 
 
@@ -69,7 +69,7 @@ public abstract class Transport {
     public void setSpeedMax(int speedMax) {
         this.speedMax = speedMax;
     }
-
+    public abstract void Refill();
     @Override
     public String toString() {
         return "transport.Transport{" +
@@ -82,7 +82,16 @@ public abstract class Transport {
                 '}';
     }
 
-    public abstract void Refill();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Transport)) return false;
+        Transport transport = (Transport) o;
+        return getYearProduction() == transport.getYearProduction() && getSpeedMax() == transport.getSpeedMax() && Objects.equals(getBrand(), transport.getBrand()) && Objects.equals(getModel(), transport.getModel()) && Objects.equals(getColorBody(), transport.getColorBody()) && Objects.equals(getProductionCountry(), transport.getProductionCountry());
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(getBrand(), getModel(), getColorBody(), getYearProduction(), getProductionCountry(), getSpeedMax());
+    }
 }
