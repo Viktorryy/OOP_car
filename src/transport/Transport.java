@@ -5,28 +5,29 @@ import java.util.Objects;
 public abstract class Transport {
     private  String brand;
     private  String model;
+    private float volumeEngine;
+
     private String colorBody;
     private  int yearProduction;
     private  String productionCountry;
     private int speedMax;
 
 
-    public Transport(String brand, String model, String colorBody,
-                     int yearProduction, String productionCountry,
-                     int speedMax) {
+    public Transport(String brand, String model,
+                     float volumeEngine) {
         this.brand = brand;
         this.model = model;
+        this.volumeEngine = volumeEngine;
+
         this.colorBody = validOrDefault(colorBody, "Default");
         this.yearProduction = yearProduction;
-        this.productionCountry = productionCountry;
+       this.productionCountry = productionCountry;
         this.speedMax = speedMax > 0 ? speedMax : 0;
     }
 
-    public Transport(String brand, String model,
-                     String productionCountry
-    ) {
-        this("Default", "Default", "Default",
-                0, "Default", 0);
+    public Transport(String brand, String model) {
+        this.brand = "Default";
+        this.model = "Default";
     }
 
     public static String validOrDefault(String value, String valueDefault) {
@@ -46,40 +47,34 @@ public abstract class Transport {
         return model;
     }
 
-    public String getColorBody() {
-        return colorBody;
+    public float getVolumeEngine() {
+        return volumeEngine;
     }
 
-    public void setColorBody(String colorBody) {
-        this.colorBody = colorBody;
+    public void setVolumeEngine(float volumeEngine) {
+        this.volumeEngine = volumeEngine;
     }
 
-    public int getYearProduction() {
-        return yearProduction;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
-    public String getProductionCountry() {
-        return productionCountry;
+    public void setModel(String model) {
+        this.model = model;
     }
 
-    public int getSpeedMax() {
-        return speedMax;
-    }
-
-    public void setSpeedMax(int speedMax) {
-        this.speedMax = speedMax;
-    }
     public abstract void Refill();
+
+    public abstract void startMoving();
+
+    public abstract void finishMoving();
+
+
     @Override
     public String toString() {
-        return "transport.Transport{" +
-                "brand='" + brand + '\'' +
+        return  "brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
-                ", colorBody='" + colorBody + '\'' +
-                ", yearProduction=" + yearProduction +
-                ", productionCountry='" + productionCountry + '\'' +
-                ", speedMax=" + speedMax +
-                '}';
+                ", volumeEngine='" + volumeEngine ;
     }
 
     @Override
@@ -87,11 +82,11 @@ public abstract class Transport {
         if (this == o) return true;
         if (!(o instanceof Transport)) return false;
         Transport transport = (Transport) o;
-        return getYearProduction() == transport.getYearProduction() && getSpeedMax() == transport.getSpeedMax() && Objects.equals(getBrand(), transport.getBrand()) && Objects.equals(getModel(), transport.getModel()) && Objects.equals(getColorBody(), transport.getColorBody()) && Objects.equals(getProductionCountry(), transport.getProductionCountry());
+        return Float.compare(transport.getVolumeEngine(), getVolumeEngine()) == 0 && Objects.equals(getBrand(), transport.getBrand()) && Objects.equals(getModel(), transport.getModel());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getBrand(), getModel(), getColorBody(), getYearProduction(), getProductionCountry(), getSpeedMax());
+        return Objects.hash(getBrand(), getModel(), getVolumeEngine());
     }
 }

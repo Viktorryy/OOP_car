@@ -1,12 +1,21 @@
 package transport;
 
-public class Bus extends Transport{
+public class Bus extends Transport implements Competing{
 
 
-    public Bus(String brand, String model, String colorBody, int yearProduction, String productionCountry, int speedMax) {
-        super(brand, model, colorBody, yearProduction, productionCountry, speedMax);
+    public Bus(String brand, String model, float volumeEngine) {
+        super(brand, model, volumeEngine);
     }
 
+    @Override
+    public void startMoving() {
+        System.out.println(super.getBrand()+" начать движение!!");
+    }
+
+    @Override
+    public void finishMoving() {
+        System.out.println(super.getBrand()+" закончить движение!!");
+    }
 
     public void Refill() {
         System.out.println("Нужно заправлять бензином или дизелем на заправке.");
@@ -24,5 +33,21 @@ public class Bus extends Transport{
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+
+
+    @Override
+    public void pitStop() {
+        System.out.println(super.getBrand()+" "+ super.getModel()+" "+ PIT);
+    }
+
+    @Override
+    public void bestLapTime() {
+        System.out.println(BEST+" "+super.getBrand()+" "+ super.getModel() );
+    }
+
+    @Override
+    public void maxSpeed() {
+        System.out.println(SPEED+" "+super.getBrand()+" "+ super.getModel() );
     }
 }
