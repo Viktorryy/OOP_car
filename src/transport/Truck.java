@@ -2,10 +2,21 @@ package transport;
 
 public class Truck extends Transport implements Competing{
 
-    public Truck(String brand, String model, float volumeEngine) {
+
+    public enum LoadCapacity {
+        N1("с полной массой до 3,5 тонн"),
+        N2("с полной массой свыше 3,5 до 12 тонн"),
+        N3("с полной массой свыше 12 тонн");
+
+       LoadCapacity(String body) {
+        }
+    }
+    public Truck(String brand, String model, float volumeEngine, LoadCapacity loadCapacity) {
         super(brand, model, volumeEngine);
+        this.loadCapacity=loadCapacity;
     }
 
+    public LoadCapacity loadCapacity;
     public Truck(String brand, String model) {
         super(brand, model);
     }
@@ -28,7 +39,7 @@ public class Truck extends Transport implements Competing{
 
     @Override
     public String toString() {
-        return "transport.Truck{} " + super.toString();
+        return "transport.Truck{} " + super.toString() +" "+ this.loadCapacity.name();
     }
 
     @Override

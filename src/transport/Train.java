@@ -9,13 +9,14 @@ public class Train extends Transport {
     private String endingStation;
     private int amountWagons;
 
-    public Train(String brand, String model, String colorBody,
+    public Train(String brand, String model, float volumeEngine,
+                 String colorBody,
                  int yearProduction, String productionCountry,
                  int speedMax, float priceTrip, float travelTime,
                  String departureStation, String endingStation,
                  int amountWagons) {
-        super(brand, model, colorBody, yearProduction,
-                productionCountry, speedMax);
+
+        super(brand, model, volumeEngine);
         this.priceTrip = priceTrip > 0f ? priceTrip : 10f;
         this.travelTime = travelTime > 0f ? travelTime : 0;
         this.departureStation = Transport.validOrDefault(departureStation, "Default");
@@ -64,9 +65,19 @@ public class Train extends Transport {
         this.amountWagons = amountWagons;
     }
 
-    @Override
+
     public void Refill() {
         System.out.println("Нужно заправлять дизелем.");
+    }
+
+    @Override
+    public void startMoving() {
+
+    }
+
+    @Override
+    public void finishMoving() {
+
     }
 
     @Override

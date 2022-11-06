@@ -1,5 +1,7 @@
 import Driver.DriverB;
 import transport.*;
+
+import javax.xml.crypto.dsig.spec.XPathFilterParameterSpec;
 //import transport.Cars;
 
 
@@ -58,9 +60,9 @@ public class Main {
     //    train[0].Refill();
 
         Bus[] bus = new Bus[3];
-        bus[0] = new Bus("Икарус", "000", 200 );
-        bus[1] = new Bus("Mercedes", "111", 150);
-        bus[2] = new Bus("Газель", "222", 180);
+        bus[0] = new Bus("Икарус", "000", 200 , Bus.BusCapacity.B2);
+        bus[1] = new Bus("Mercedes", "111", 150,Bus.BusCapacity.B5);
+        bus[2] = new Bus("Газель", "222", 180, Bus.BusCapacity.B3);
 
 
         System.out.println("     Автобусы");
@@ -71,9 +73,9 @@ public class Main {
         }
        // bus[0].Refill();
         Truck[] truck = new Truck[3];
-        truck[0] = new Truck("КАМАЗ", "000", 500 );
-        truck[1] = new Truck("DAF", "111", 550);
-        truck[2] = new Truck("MAN", "222", 600);
+        truck[0] = new Truck("КАМАЗ", "000", 500 , Truck.LoadCapacity.N2);
+        truck[1] = new Truck("DAF", "111", 550, Truck.LoadCapacity.N1);
+        truck[2] = new Truck("MAN", "222", 600, Truck.LoadCapacity.N3 );
 
 
         System.out.println("     Грузовики");
@@ -84,9 +86,9 @@ public class Main {
         }
 
         Car[] car = new Car[3];
-        car[0] = new Car("Audi", "A8 (D5) седан", 280 );
-        car[1] = new Car("Mercedes-Benz", " CLA AMG C118 AMG седан", 310);
-        car[2] = new Car("BMW", "8 Gran Coupe G15 седан", 320);
+        car[0] = new Car("Audi", "A8 (D5) ", 280,  Car.BodyType.SUV);
+        car[1] = new Car("Mercedes-Benz", " CLA AMG C118 AMG ", 310, Car.BodyType.CROSSOVER);
+        car[2] = new Car("BMW", "8 Gran Coupe G15 ", 320, Car.BodyType.SUV);
 
 
         System.out.println("     Легковые автомобили");
