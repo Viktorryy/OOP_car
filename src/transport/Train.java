@@ -81,6 +81,16 @@ public class Train extends Transport {
     }
 
     @Override
+    public void definitionType() {
+
+    }
+
+    @Override
+    public boolean service() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return super.toString() +
                 "priceTrip=" + priceTrip +

@@ -17,9 +17,19 @@ public abstract class Driver<T extends Transport>{
         this.fioDriver = validOrDefault(fioDriver, "Default");
         this.havingDriverLicense = validOrDefault(havingDriverLicense,"Default");
         this.experience =experience>0?experience:0;
-        this.car = car;
+        setCar(car);
     }
 
+    public T getCar() {
+        return car;
+    }
+
+    public void setCar(T car) {
+        if ( car==null){
+            throw new IllegalArgumentException("Необходимо указать категорию прав");
+        }
+        this.car = car;
+    }
 
     public String getFioDriver() {
         return fioDriver;
@@ -71,8 +81,6 @@ public abstract class Driver<T extends Transport>{
     public String toString() {
         return String.format("Водитель %s управляет автомобилем %s %s и будет участвовать в гонках",
                 getFioDriver(), this.car.getBrand(), this.car.getModel());
-
-
 
 
     }

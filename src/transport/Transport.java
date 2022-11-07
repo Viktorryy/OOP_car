@@ -69,6 +69,11 @@ public abstract class Transport {
 
     public abstract void finishMoving();
 
+    public abstract void definitionType();
+
+    public abstract boolean service();
+
+
 
     @Override
     public String toString() {

@@ -15,64 +15,74 @@ public class Car extends Transport implements Competing {
         VAN("Фургон"),
         MINIVAN("Минивэн");
 
+        private final String body;
 
         BodyType(String body) {
+            this.body = body;
         }
 
     }
-        public BodyType bodyType;
+
+    public BodyType bodyType;
 
 
-
-        public BodyType getBodyType() {
-            return bodyType;
-        }
-
-        public void setBodyType(BodyType bodyType) {
-            this.bodyType = bodyType;
-        }
+    public BodyType getBodyType() {
+        return bodyType;
+    }
 
 
+    public Car(String brand, String model, float volumeEngine, BodyType bodyType) {
+        super(brand, model, volumeEngine);
+        this.bodyType = bodyType;
+    }
 
+    @Override
+    public void Refill() {
+        System.out.println("Заправить авто!");
+    }
 
-        public Car(String brand, String model, float volumeEngine, BodyType bodyType) {
-            super(brand, model, volumeEngine);
-            this.bodyType = bodyType;
-        }
+    @Override
+    public void startMoving() {
+        System.out.println(super.getBrand() + " начать движение!!");
+    }
 
-        @Override
-        public void Refill() {
-            System.out.println("Заправить авто!");
-        }
+    @Override
+    public void finishMoving() {
+        System.out.println(super.getBrand() + " закончить движение!!");
+    }
 
-        @Override
-        public void startMoving() {
-            System.out.println(super.getBrand() + " начать движение!!");
-        }
-
-        @Override
-        public void finishMoving() {
-            System.out.println(super.getBrand() + " закончить движение!!");
-        }
-
-        @Override
-        public String toString() {
-            return "transport.Car{} " + super.toString()+"  "+ this.bodyType.name();
-        }
-
-
-        @Override
-        public void pitStop() {
-            System.out.println(super.getBrand() + " " + super.getModel() + " " + PIT);
-        }
-
-        @Override
-        public void bestLapTime() {
-            System.out.println(BEST + ": " + super.getBrand() + " " + super.getModel());
-        }
-
-        @Override
-        public void maxSpeed() {
-            System.out.println(SPEED + ": " + super.getBrand() + " " + super.getModel());
+    @Override
+    public void definitionType() {
+        if (bodyType == null) {
+            System.out.println("Данных по авто недостаточно!!");
+        } else {
+            System.out.println("Тип кузова авто:" + bodyType.body);
         }
     }
+
+    @Override
+    public boolean service() {
+        return Math.random()>0.5;
+    }
+
+    @Override
+    public String toString() {
+        return "transport.Car{} " + super.toString() + "  " + this.bodyType.body;
+    }
+
+
+    @Override
+    public void pitStop() {
+        System.out.println(super.getBrand() + " " + super.getModel() + " " + PIT);
+    }
+
+    @Override
+    public void bestLapTime() {
+        System.out.println(BEST + ": " + super.getBrand() + " " + super.getModel());
+    }
+
+    @Override
+    public void maxSpeed() {
+        System.out.println(SPEED + ": " + super.getBrand() + " " + super.getModel());
+    }
+}

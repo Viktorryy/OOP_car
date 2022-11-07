@@ -11,7 +11,9 @@ public class Bus extends Transport implements Competing {
         B4("большая (60–80) "),
         B5("особо большая (100–120 мест)" );
 
+        private final String capacity;
         BusCapacity(String capacity) {
+            this.capacity = capacity;
         }
     }
 
@@ -40,13 +42,28 @@ public class Bus extends Transport implements Competing {
         System.out.println(super.getBrand() + " закончить движение!!");
     }
 
+    @Override
+    public void definitionType() {
+        if (busCapacity == null) {
+            System.out.println("Данных по авто недостаточно!!");
+        } else {
+            System.out.println("Тип авто:" + busCapacity.capacity);
+        }
+    }
+
+    @Override
+    public boolean service() {
+        System.out.println("Автобус "+ getBrand()+" "+ getModel()+" диагностика не требуется");
+        return true;
+    }
+
     public void Refill() {
         System.out.println("Нужно заправлять бензином или дизелем на заправке.");
     }
 
     @Override
     public String toString() {
-        return "transport.Bus{} " + super.toString()+"  "+ this.getBusCapacity();
+        return "transport.Bus{} " + super.toString()+", вместимость: "+ busCapacity.capacity;
     }
 
     @Override
