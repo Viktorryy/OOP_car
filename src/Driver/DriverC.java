@@ -4,6 +4,7 @@ import transport.Truck;
 
 public class DriverC extends Driver<Truck>{
 
+
     public DriverC(String fioDriver,  int experience, Truck car) {
         super(fioDriver, "C", experience, car);
     }

@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Truck extends Transport implements Competing{
 
+
     public enum LoadCapacity {
         N1("с полной массой до 3,5 тонн"),
         N2("с полной массой свыше 3,5 до 12 тонн"),

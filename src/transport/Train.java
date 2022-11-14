@@ -2,6 +2,7 @@ package transport;
 
 import java.util.Objects;
 
+
 public class Train extends Transport {
     private float priceTrip;
     private float travelTime;

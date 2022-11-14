@@ -8,7 +8,6 @@ import static transport.Transport.validOrDefault;
 
 public abstract class Driver<T extends Transport>{
 
-
     private String fioDriver;
     private String havingDriverLicense;
     private int experience;

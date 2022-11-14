@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
 
+
 //        Cars[] car = new Cars[5];
 //        car[0] = new Cars("Lada"," Granta", "желтый", 2015 ,
 //                "Россия", 0 ,1.7f,"" ,
