@@ -1,16 +1,26 @@
 package transport;
 
+import Driver.Driver;
+import Driver.Mechanic;
+import Driver.Sponsor;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Transport {
     private  String brand;
     private  String model;
     private float volumeEngine;
+    private List<Driver<?>> drivers =new ArrayList();
+    private List<Mechanic<?>> mechanics=new ArrayList();
+    private List<Sponsor> sponsors =new ArrayList();
 
-    private String colorBody;
-    private  int yearProduction;
-    private  String productionCountry;
-    private int speedMax;
+//    private String colorBody;
+//    private  int yearProduction;
+//    private  String productionCountry;
+//    private int speedMax;
 
 
     public Transport(String brand, String model,
@@ -19,15 +29,40 @@ public abstract class Transport {
         this.model = model;
         this.volumeEngine = volumeEngine;
 
-        this.colorBody = validOrDefault(colorBody, "Default");
-        this.yearProduction = yearProduction;
-       this.productionCountry = productionCountry;
-        this.speedMax = speedMax > 0 ? speedMax : 0;
+
+//        this.colorBody = validOrDefault(colorBody, "Default");
+//        this.yearProduction = yearProduction;
+//       this.productionCountry = productionCountry;
+//        this.speedMax = speedMax > 0 ? speedMax : 0;
     }
 
     public Transport(String brand, String model) {
         this.brand = "Default";
         this.model = "Default";
+    }
+
+
+
+    public List<Driver<?>> getDrivers() {
+        return drivers;
+    }
+
+    public List<Mechanic<?>> getMechanics() {
+        return mechanics;
+    }
+
+    public List<Sponsor> getSponsors() {
+        return sponsors;
+    }
+
+    public void addDriver(Driver<?> driver){
+                drivers.add(driver);
+    }
+    public void addMechanic(Mechanic<?> mechanic){
+        mechanics.add(mechanic);
+    }
+    public void addSponsor(Sponsor... sponsor){
+       this.sponsors.addAll(Arrays.asList(sponsor));
     }
 
     public static String validOrDefault(String value, String valueDefault) {
@@ -72,6 +107,8 @@ public abstract class Transport {
     public abstract void definitionType();
 
     public abstract boolean service();
+
+    public abstract void repair();
 
 
 

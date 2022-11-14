@@ -11,6 +11,9 @@ public abstract class Driver<T extends Transport>{
     private String fioDriver;
     private String havingDriverLicense;
     private int experience;
+
+
+
     private T car;
 
     protected Driver(String fioDriver, String havingDriverLicense, int experience, T car){

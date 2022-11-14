@@ -91,6 +91,11 @@ public class Train extends Transport {
     }
 
     @Override
+    public void repair() {
+
+    }
+
+    @Override
     public String toString() {
         return super.toString() +
                 "priceTrip=" + priceTrip +

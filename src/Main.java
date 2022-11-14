@@ -1,5 +1,9 @@
 import Driver.DriverB;
+import Driver.Mechanic;
+import Driver.Sponsor;
 import transport.*;
+
+import java.util.List;
 //import transport.Cars;
 
 
@@ -57,8 +61,20 @@ public class Main {
 //        }
         //    train[0].Refill();
 
+
+        Mechanic<Car> ivan = new Mechanic<Car>("Иван", "Иванов", "SSS");
+        Mechanic<Truck> anton = new Mechanic<Truck>("Антон", "Сидоров", "ККК");
+        Mechanic<Bus> petr = new Mechanic<Bus>("Петр", "Петров", "Shell");
+        Sponsor geitz = new Sponsor("Билл Гейтс", 20_000_000);
+        Sponsor bill = new Sponsor("Билли", 20_000_000);
+        Sponsor mishlin = new Sponsor("Mishlin", 15_000_000);
+        Sponsor shell = new Sponsor("Shell", 10_000_000);
+
         Bus[] bus = new Bus[3];
         bus[0] = new Bus("Икарус", "000", 200, Bus.BusCapacity.B2);
+        bus[0].addMechanic(petr);
+        bus[0].addSponsor(shell);
+
         bus[1] = new Bus("Mercedes", "111", 150, Bus.BusCapacity.B5);
         bus[2] = new Bus("Газель", "222", 180, Bus.BusCapacity.B3);
 
@@ -72,6 +88,8 @@ public class Main {
         // bus[0].Refill();
         Truck[] truck = new Truck[3];
         truck[0] = new Truck("КАМАЗ", "000", 500, Truck.LoadCapacity.N2);
+        truck[0].addMechanic(anton);
+        truck[0].addSponsor(mishlin);
         truck[1] = new Truck("DAF", "111", 550, Truck.LoadCapacity.N1);
         truck[2] = new Truck("MAN", "222", 600, Truck.LoadCapacity.N3);
 
@@ -83,8 +101,13 @@ public class Main {
             j.bestLapTime();
         }
 
+
         Car[] car = new Car[3];
         car[0] = new Car("Audi", "A8 (D5) ", 280, Car.BodyType.SUV);
+        car[0].addMechanic(ivan);
+        car[0].addSponsor(geitz);
+        car[0].addSponsor(bill);
+
         car[1] = new Car("Mercedes-Benz", " CLA AMG C118 AMG ", 310, Car.BodyType.CROSSOVER);
         car[2] = new Car("BMW", "8 Gran Coupe G15 ", 320, Car.BodyType.SUV);
 
@@ -101,20 +124,44 @@ public class Main {
                 bus[0], bus[1]
         );
 
+        List<Transport> transports = List.of(
+                car[0], truck[0],  bus[0]
+        );
+
+        for (Transport t:transports) {
+            printInfo(t);
+        }
+       // printInfo();
+
         DriverB[] driverB = new Driver.DriverB[2];
         driverB[0] = new Driver.DriverB("Фернандо Алонсо", 21, car[0]);
 
-        System.out.println(driverB[0]);
+     //   System.out.println(driverB[0]);
 
 
         Driver.DriverD[] driverD = new Driver.DriverD[2];
         driverD[0] = new Driver.DriverD("Себастьян Феттель", 11, bus[1]);
-        System.out.println(driverD[0]);
+      //  System.out.println(driverD[0]);
 
 
         Driver.DriverC[] driverC = new Driver.DriverC[2];
         driverC[0] = new Driver.DriverC("Валттери Боттас", 11, truck[2]);
-        System.out.println(driverC[0]);
+      //  System.out.println(driverC[0]);
+
+
+
+
+    }
+    private static void printInfo(Transport transport){
+        System.out.println("    Информация по автомобилю "+transport.getBrand()+" "+transport.getModel() );
+        System.out.println("Спонсоры: "+ transport.getSponsors());
+//        for (Sponsor sponsor: transport.getSponsors()){
+//            System.out.println(sponsor.getName());
+//        }
+        System.out.println("Механики: " +transport.getMechanics());
+//        for (Mechanic<?> mechanic: transport.getMechanics()){
+//            System.out.println(mechanic.getName()+" "+mechanic.getSurname()+", из "+mechanic.getCompany());
+//        }
 
 
     }
