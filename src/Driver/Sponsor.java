@@ -1,7 +1,6 @@
 package Driver;
 
 public class Sponsor {
-
     private final String name;
     private final int amount;
 

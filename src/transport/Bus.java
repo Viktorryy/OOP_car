@@ -3,7 +3,6 @@ package transport;
 import java.util.Objects;
 
 public class Bus extends Transport implements Competing {
-
     public enum BusCapacity{
         B1("особо малая (до 10 мест)"),
         B2("малая (до 25)"),

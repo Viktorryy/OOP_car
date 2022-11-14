@@ -3,7 +3,6 @@ package transport;
 import java.util.Objects;
 
 public class Car extends Transport implements Competing {
-
     public enum BodyType {
         SEDAN("Седан"),
         HATCHBACK("Хетчбек"),
