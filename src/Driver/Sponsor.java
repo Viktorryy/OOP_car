@@ -8,6 +8,8 @@ public class Sponsor {
     public Sponsor(String name, int amount) {
         this.name = name;
         this.amount = amount;
+
+
     }
 
     public String getName() {
