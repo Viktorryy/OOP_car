@@ -130,6 +130,14 @@ public class Main {
                 car[0], truck[0],  bus[0]
         );
 
+
+        Servicestation servicestation = new Servicestation();
+        servicestation.addCar(car[0]);
+        servicestation.addTruck(truck[0]);
+        servicestation.service();
+        servicestation.service();
+
+
         for (Transport t:transports) {
             printInfo(t);
         }
